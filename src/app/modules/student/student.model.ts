@@ -114,7 +114,7 @@ export const studentSchema = new Schema<TStudent, StudentModel>(
       type: String,
       required: [true, 'Contact Number is required'],
     },
-    emergencyContactNumber: {
+    emergencyContactNo: {
       type: String,
       required: [true, 'Emergency Contact Number is required'],
     },
