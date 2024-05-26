@@ -108,7 +108,7 @@ export const studentSchema = new Schema<TStudent, StudentModel>(
       required: true,
     },
     dateOfBirth: {
-      type: String,
+      type: Date,
     },
     contactNo: {
       type: String,
