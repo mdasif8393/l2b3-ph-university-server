@@ -1,4 +1,5 @@
 import { Schema, model } from 'mongoose';
+
 import {
   AcademicSemesterCode,
   AcademicSemesterName,
