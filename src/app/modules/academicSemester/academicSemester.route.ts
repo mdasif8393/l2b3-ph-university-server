@@ -1,6 +1,6 @@
 import express from 'express';
 import validateRequest from '../../middlewares/validateRequest';
-import { AcademicSemesterController } from './academicSemester.controller';
+import { AcademicSemesterControllers } from './academicSemester.controller';
 import { AcademicSemesterValidations } from './academicSemester.validation';
 
 const router = express.Router();
@@ -10,7 +10,7 @@ router.post(
   validateRequest(
     AcademicSemesterValidations.createAcademicSemesterValidationSchema,
   ),
-  AcademicSemesterController.createAcademicSemester,
+  AcademicSemesterControllers.createAcademicSemester,
 );
 
 export const AcademicSemesterRoutes = router;

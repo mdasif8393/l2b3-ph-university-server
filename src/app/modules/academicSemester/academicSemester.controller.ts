@@ -16,6 +16,6 @@ const createAcademicSemester = catchAsync(async (req, res) => {
   });
 });
 
-export const AcademicSemesterController = {
+export const AcademicSemesterControllers = {
   createAcademicSemester,
 };

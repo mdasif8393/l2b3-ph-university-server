@@ -86,8 +86,8 @@ export const studentSchema = new Schema<TStudent, StudentModel>(
   {
     id: {
       type: String,
+      required: [true, 'ID is required'],
       unique: true,
-      required: [true, 'id is required'],
     },
     user: {
       type: Schema.Types.ObjectId,
@@ -153,6 +153,10 @@ export const studentSchema = new Schema<TStudent, StudentModel>(
     },
     profileImg: {
       type: String,
+    },
+    admissionSemester: {
+      type: Schema.Types.ObjectId,
+      ref: 'AcademicSemester',
     },
     isDeleted: {
       type: Boolean,
