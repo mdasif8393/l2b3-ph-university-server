@@ -2,6 +2,7 @@
 import { ErrorRequestHandler, NextFunction } from 'express';
 import { ZodError } from 'zod';
 import config from '../config';
+import AppError from '../errors/AppError';
 import handleCastError from '../errors/handleCastError';
 import handleDuplicateError from '../errors/handleDuplicateError';
 import handleValidationError from '../errors/handleValidationError';
@@ -18,8 +19,8 @@ const globalErrorHandler: ErrorRequestHandler = (
   next: NextFunction,
 ) => {
   // setting default values
-  let statusCode: number = err.statusCode || 500;
-  let message: string = err.message || 'Something went wrong';
+  let statusCode: number = 500;
+  let message: string = 'Something went wrong';
 
   let errorSources: TErrorSources = [
     {
@@ -55,6 +56,17 @@ const globalErrorHandler: ErrorRequestHandler = (
     statusCode = simplifiedError?.statusCode;
     message = simplifiedError.message;
     errorSources = simplifiedError.errorSources;
+  }
+  // handle App Error
+  else if (err instanceof AppError) {
+    statusCode = err?.statusCode;
+    message = err.message;
+    errorSources = [{ path: '', message: err?.message }];
+  }
+  // handle Error
+  else if (err instanceof Error) {
+    message = err.message;
+    errorSources = [{ path: '', message: err?.message }];
   }
 
   return res.status(statusCode).json({
