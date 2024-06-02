@@ -41,7 +41,7 @@ const updateStudentIntoDB = async (id: string, payload: Partial<TStudent>) => {
   };
 
   /*
-  Postman From
+  From // get data from postman in this format
   guardian: {
     fatherOccupation: "Teacher" [key: value]
   }
@@ -68,13 +68,11 @@ const updateStudentIntoDB = async (id: string, payload: Partial<TStudent>) => {
     }
   }
 
-  console.log(modifiedUpdatedData);
-
-  const result = await Student.findOneAndUpdate({ id }, modifiedUpdatedData, {
-    new: true,
-    runValidators: true, // mongoose again validate
-  });
-  return result;
+  // const result = await Student.findOneAndUpdate({ id }, modifiedUpdatedData, {
+  //   new: true,
+  //   runValidators: true, // mongoose again validate
+  // });
+  // return result;
 };
 
 const deleteStudentsFromDB = async (id: string) => {
