@@ -15,7 +15,7 @@ router.get('/:id', CourseControllers.getSingleCourse);
 
 router.patch(
   '/:id',
-  validateRequest(CourseValidations.updateCourseValidationSchema),
+  validateRequest(CourseValidations.updateCreateCourseValidationSchema),
   CourseControllers.updateCourse,
 );
 
