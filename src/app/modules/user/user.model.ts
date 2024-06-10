@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-this-alias */
+
 import bcrypt from 'bcrypt';
 import { model, Schema } from 'mongoose';
 import config from '../../config';
-import { TUser } from './user.interface';
+import { TUser, UserModel } from './user.interface';
 
-const userSchema = new Schema<TUser>(
+const userSchema = new Schema<TUser, UserModel>(
   {
     id: {
       type: String,
@@ -27,6 +28,7 @@ const userSchema = new Schema<TUser>(
     status: {
       type: String,
       enum: ['in-progress', 'blocked'],
+      default: 'in-progress',
     },
     isDeleted: {
       type: Boolean,
@@ -54,5 +56,19 @@ userSchema.post('save', function (doc, next) {
   doc.password = '';
   next();
 });
+// check is user exists or not
+// check in auth.service
+userSchema.statics.isUserExistsByCustomId = async function (id: string) {
+  return await User.findOne({ id });
+};
 
-export const User = model<TUser>('User', userSchema);
+// check password
+// check in auth.service
+userSchema.statics.isPasswordMatched = async function (
+  plainTextPassword,
+  hashedPassword,
+) {
+  return await bcrypt.compare(plainTextPassword, hashedPassword);
+};
+
+export const User = model<TUser, UserModel>('User', userSchema);
