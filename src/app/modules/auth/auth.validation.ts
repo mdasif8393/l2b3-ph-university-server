@@ -7,6 +7,14 @@ const loginValidationSchema = z.object({
   }),
 });
 
+const changePasswordValidationSchema = z.object({
+  body: z.object({
+    oldPassword: z.string({ required_error: 'old PassWord is required' }),
+    newPassword: z.string({ required_error: 'new password is required' }),
+  }),
+});
+
 export const AuthValidation = {
   loginValidationSchema,
+  changePasswordValidationSchema,
 };
